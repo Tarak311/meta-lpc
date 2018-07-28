@@ -700,7 +700,7 @@ static void msg_thread_handler(struct work_struct *my_work)
  }
 static int LPC_probe(struct spi_device *spi)
 {
-
+	printk(KERN_EMERG "LPC Module probed\n");
 	struct spidev_data *spidat;
 	struct work_data* my_msg_work;
   my_msg_work = kmalloc(sizeof(struct work_data), GFP_KERNEL);
@@ -751,7 +751,7 @@ static int LPC_probe(struct spi_device *spi)
 	INIT_WORK(&my_msg_work->msg_work,msg_thread_handler);
 	schedule_work(&my_msg_work->msg_work);
 	printk(KERN_EMERG "CS: %d\n",spi->chip_select);
-	printk(KERN_EMERG "LPC Module probed\n");
+
 	printk("spi->mode: %04x\n",spi->mode);
 	return status;
 
