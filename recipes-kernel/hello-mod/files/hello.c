@@ -573,26 +573,26 @@ static int spidev_open(struct inode *inode, struct file *filp)
 
 	if (status) {
 		pr_debug("spidev: nothing for minor %d\n", iminor(inode));
-		goto err_find_dev;
-	}
-
-	if (!spidev->tx_buffer) {
-		spidev->tx_buffer = kmalloc(bufsiz, GFP_KERNEL);
-		if (!spidev->tx_buffer) {
-			dev_dbg(&spidev->spi->dev, "open/ENOMEM\n");
-			status = -ENOMEM;
 			goto err_find_dev;
 		}
-	}
 
-	if (!spidev->rx_buffer) {
-		spidev->rx_buffer = kmalloc(bufsiz, GFP_KERNEL);
-		if (!spidev->rx_buffer) {
-			dev_dbg(&spidev->spi->dev, "open/ENOMEM\n");
-			status = -ENOMEM;
-			goto err_alloc_rx_buf;
+		if (!spidev->tx_buffer) {
+			spidev->tx_buffer = kmalloc(bufsiz, GFP_KERNEL);
+			if (!spidev->tx_buffer) {
+				dev_dbg(&spidev->spi->dev, "open/ENOMEM\n");
+				status = -ENOMEM;
+				goto err_find_dev;
+			}
 		}
-	}
+
+		if (!spidev->rx_buffer) {
+			spidev->rx_buffer = kmalloc(bufsiz, GFP_KERNEL);
+			if (!spidev->rx_buffer) {
+				dev_dbg(&spidev->spi->dev, "open/ENOMEM\n");
+				status = -ENOMEM;
+				goto err_alloc_rx_buf;
+			}
+		}
 
 	spidev->users++;
 	filp->private_data = spidev;
@@ -757,7 +757,7 @@ static int LPC_probe(struct spi_device *spi)
 
 }
 static const struct of_device_id lpc1769_of_ids[]={
-	{.compatible="NXP,lpc1768-i2c"},
+	{.compatible="lpc1768-i2c"},
 	{},
 };
 MODULE_DEVICE_TABLE(of,lpc1769_of_ids);
@@ -767,7 +767,7 @@ MODULE_DEVICE_TABLE(of,lpc1769_of_ids);
 static struct spi_driver lpc1769_spi_driver = {
 
 	.driver = {
-		.name="NXP,lpc1768-i2c",
+		.name="lpc1768-i2c",
 		.of_match_table = of_match_ptr(lpc1769_of_ids),
 	},
 	.probe=LPC_probe,
