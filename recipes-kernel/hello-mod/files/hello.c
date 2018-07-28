@@ -767,7 +767,7 @@ MODULE_DEVICE_TABLE(of,lpc1769_of_ids);
 static struct spi_driver lpc1769_spi_driver = {
 
 	.driver = {
-		.name="lpc1769_spi",
+		.name="NXP,lpc1768-i2c",
 		.of_match_table = of_match_ptr(lpc1769_of_ids),
 	},
 	.probe=LPC_probe,
