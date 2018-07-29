@@ -1,4 +1,4 @@
-obj-m := lpc_i2c.o
+obj-m := lpci2c.o
 
 SRC := $(shell pwd)
 
