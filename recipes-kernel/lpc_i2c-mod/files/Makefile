@@ -1,4 +1,4 @@
-obj-m := hello.o
+obj-m := lpc_i2c.o
 
 SRC := $(shell pwd)
 
