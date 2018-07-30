@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include <stdio.h>
 #include <fcntl.h>
 #include <linux/i2c-dev.h>
@@ -6,28 +5,22 @@
 
 int main (void)
 {
-
 	int deviceHandle;
 	int readBytes;
 char buffer[]={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
-
 	// initialize buffer
 	buffer[0] = 0x55;
-
 	// address of DS1307 RTC device
 int deviceI2CAddress = 0x5d;
-
 	// open device on /dev/i2c-0
 	if ((deviceHandle = open("/dev/i2c-1", O_RDWR)) < 0) {
 		printf("Error: Couldn't open device! %d\n", deviceHandle);
 		return 1;
 	}
-
 	if (ioctl(deviceHandle, I2C_SLAVE, deviceI2CAddress) < 0) {
 			printf("Error: Couldn't find device on address!\n");
 
 		}
-
 	// begin transmission and request acknowledgement
 	//readBytes = write(deviceHandle, buffer, 1);
 	//if (readBytes != 1)
@@ -44,28 +37,7 @@ int deviceI2CAddress = 0x5d;
 		printf("value is %02x\n",buffer[3] );
 		printf("value is %02x\n",buffer[1] );
 		printf("value is %02x\n",buffer[0] );
-
 	// close connection and return
 	close(deviceHandle);
 	return 0;
-=======
-
-#include "/home/tarak/rpi/meta-lpc/recipes-i2ctemperature/i2ctemp/files/inc/wiringPiI2C.h"
-#include <stdio.h>
-
-int main()
-{
-   int fd, result;
-
-   fd = wiringPiI2CSetup(0x5d);
-
-
-   for(int i = 0; i < 5; i++)
-   {
-      int a=0x54;
-      result = wiringPiI2CWriteReg8(fd, a,0x55);
-        printf("value is:%s\n",result );
-
-   }
->>>>>>> 3fa18bf73b99e9bc972c896b61111892f4fba533
 }

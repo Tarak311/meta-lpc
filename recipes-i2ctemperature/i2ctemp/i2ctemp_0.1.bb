@@ -13,11 +13,7 @@ SRC_URI = "file://i2ctemp.c"
 S = "${WORKDIR}"
 
 do_compile() {
-<<<<<<< HEAD
 	     ${CC} ${LDFLAGS} i2ctemp.c  	 -o i2ctemp
-=======
-	     ${CC} ${LDFLAGS} -Idir 	 /home/tarak/rpi/meta-lpc/recipes-i2ctemperature/i2ctemp/files/wiringPiI2C.c i2ctemp.c  	 -o i2ctemp
->>>>>>> 3fa18bf73b99e9bc972c896b61111892f4fba533
 }
 
 do_install() {
