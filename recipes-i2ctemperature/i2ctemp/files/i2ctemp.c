@@ -23,20 +23,35 @@ int main (void)
 
  //readBytes = write(deviceHandle, buffer, 1);
  readBytes = read(deviceHandle, buffer, 9);
- if (readBytes != 7)
+ if (readBytes != 9)
 	{
 		printf("Error: Received no data!");
 	}
- else {	printf(" Received  data!");}
- printf("temperature is:      %02x\n",buffer[1] );
- printf("temperature is:      %02x\n",buffer[0] );
- printf("High temperature is: %02x\n",buffer[2] );
- printf("Low temperature is:  %02x\n",buffer[3] );
- printf("configuration is:    %02x\n",buffer[4] );
- printf("value is:            %02x\n",buffer[5] );
- printf("value is:            %02x\n",buffer[6] );
- printf("value is:            %02x\n",buffer[7] );
- printf("crc is:            %02x\n",buffer[8] );
+ else
+ {
+	 printf(" ---------------------------\n");
+	 	printf("| DS1482 scratchpad values:	|\n");
+		printf(" ---------------------------\n");
+		printf("|temperature is:     | %02x |\n",buffer[1] );
+		printf(" ---------------------------\n");
+	  printf("|temperature is:     | %02x |\n",buffer[0] );
+		printf(" ---------------------------\n");
+	  printf("|High temp reg			 | %02x |\n",buffer[2] );
+		printf(" ---------------------------\n");
+	  printf("|Low temp reg				 | %02x |\n",buffer[3] );
+		printf(" ---------------------------\n");
+	  printf("|Config register     | %02x |\n",buffer[4] );
+		printf(" ---------------------------\n");
+	  printf("|reserved register   | %02x |\n",buffer[5] );
+		printf(" ---------------------------\n");
+	  printf("|reserved register   | %02x |\n",buffer[6] );
+		printf(" ---------------------------\n");
+	  printf("|reserved register   | %02x |\n",buffer[7] );
+		printf(" ---------------------------\n");
+	  printf("|CRC:                | %02x |\n",buffer[8] );
+		printf(" ---------------------------\n");
+ }
+
  close(deviceHandle);
  return 0;
 }
