@@ -1,0 +1,4 @@
+SANITY_VERSION 1
+TMPDIR /home/tarak/rpi/build/tmp
+SSTATE_DIR /home/tarak/rpi/build/sstate-cache
+NATIVELSBSTRING ubuntu-18.04
