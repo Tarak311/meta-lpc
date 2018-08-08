@@ -93,7 +93,11 @@ int readi2c(int& devhndl,struct scratchpad& sp)
 }
 int printscratchpad(struct scratchpad& sc)
 {
-
+		uint8_t temp_dec = temp1>>4||temp0<<4;
+		float temp_frac = temp1&0x0F;
+		temp_frac=temp_frac<<19;
+		double temperature = temp_dec +temp_frac;
+		cout<<temperature<<endl;
 	printf(" ---------------------------\n");
 	printf("|  DS1482 scratchpad values: |\n");
 	printf(" ---------------------------\n");

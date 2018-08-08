@@ -13,7 +13,7 @@ SRC_URI = "file://tcpi2c.cpp"
 S = "${WORKDIR}"
 
 do_compile() {
-	     ${CCX} ${LDFLAGS} tcpi2c.cpp  -o tcpi2c
+	     ${CXX} ${LDFLAGS} tcpi2c.cpp  -o tcpi2c
 }
 
 do_install() {
