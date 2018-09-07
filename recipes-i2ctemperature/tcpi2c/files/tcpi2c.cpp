@@ -43,7 +43,8 @@ int main()
     server_address.sin_family = AF_INET;
     server_address.sin_addr.s_addr = htonl(INADDR_ANY);
     server_address.sin_port = htons(2017);         // this is the port number of running server
-    bind(server_socket, (struct sockaddr*)&server_address , sizeof(server_address));
+
+		bind(server_socket, (struct sockaddr*)&server_address , sizeof(server_address));
     listen(server_socket , 20);
     if ((deviceHandle = open("/dev/i2c-1", O_RDWR)) < 0)
     	{
@@ -55,6 +56,7 @@ int main()
     		printf("Error: Couldn't find device on address!\n");
 
     	}
+				readBytes = write(deviceHandle, scratchpad, 1);
     while(1)
     {
 
@@ -93,11 +95,10 @@ int readi2c(int& devhndl,struct scratchpad& sp)
 }
 int printscratchpad(struct scratchpad& sc)
 {
-		uint8_t temp_dec = temp1>>4||temp0<<4;
-		float temp_frac = temp1&0x0F;
-		temp_frac=temp_frac<<19;
-		double temperature = temp_dec +temp_frac;
-		cout<<temperature<<endl;
+	uint8_t temp_dec = (sc.temp1&&0xFF)>>4||(sc.temp0&&0xFF)<<4;
+	float temp_frac = sc.temp1&0x0F;
+	double temperature = temp_dec +temp_frac;
+	cout<<temp_dec<<endl;
 	printf(" ---------------------------\n");
 	printf("|  DS1482 scratchpad values: |\n");
 	printf(" ---------------------------\n");
